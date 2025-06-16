@@ -1,6 +1,6 @@
 from flask import jsonify
-from core import app
-from db_operations import (
+from flask import Blueprint
+from app.services import (
     create_user,
     get_user,
     get_all_users,
@@ -10,12 +10,15 @@ from db_operations import (
 from flask import request
 
 
-@app.route("/api/users", methods=["GET"])
+main_bp = Blueprint('main', __name__)
+
+
+@main_bp.route("/api/users", methods=["GET"])
 def get_api_users():
     return jsonify(get_all_users())
 
 
-@app.route("/api/users/<int:user_id>", methods=["GET"])
+@main_bp.route("/api/users/<int:user_id>", methods=["GET"])
 def get_api_user(user_id):
     try:
         user = get_user(user_id)
@@ -26,7 +29,7 @@ def get_api_user(user_id):
         return jsonify({"error": str(e)}), 500
 
 
-@app.route("/api/users/<int:user_id>", methods=["DELETE"])
+@main_bp.route("/api/users/<int:user_id>", methods=["DELETE"])
 def delete_api_user(user_id):
     try:
         data = delete_user(user_id)
@@ -35,7 +38,7 @@ def delete_api_user(user_id):
         return jsonify({"error": str(e)}), 500
 
 
-@app.route("/api/users/<int:user_id>", methods=["PUT"])
+@main_bp.route("/api/users/<int:user_id>", methods=["PUT"])
 def edit_api_user(user_id):
     payload = request.get_json()
     if not payload:
@@ -66,7 +69,7 @@ def edit_api_user(user_id):
         return jsonify({"error": "User not found"}), 404
 
 
-@app.route("/api/users", methods=["POST"])
+@main_bp.route("/api/users", methods=["POST"])
 def create_api_user():
     data = request.get_json()
     if not data:

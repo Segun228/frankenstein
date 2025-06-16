@@ -1,5 +1,5 @@
-from core import db
-from models import Post
+from app import db
+from app.models import Post
 
 
 def create_user(username, email, password):
