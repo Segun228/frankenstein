@@ -11,8 +11,8 @@
 
 .title {
   text-align: center;
-  font-size: 2rem;
-  font-weight: 600;
+  font-size: 2.2rem;
+  font-weight: 650;
 }
 
 .subtitle{
@@ -22,7 +22,7 @@
 }
 
 .form-section {
-    width: 60%;
+    width: 40vw;
     background: #f9f9f9;
     border-radius: 0.8vw;
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
@@ -30,6 +30,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 2vh;
 }
 
 .form {
@@ -72,9 +73,10 @@ button:hover {
 }
 
 .flex-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1vw;
+    padding: 1rem;
 }
 
 .user-card {
@@ -105,4 +107,8 @@ button:hover {
 
 .error{
     color: red;
+}
+
+.success{
+    color: green;
 }
